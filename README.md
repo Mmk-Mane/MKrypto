@@ -10,23 +10,12 @@ The application allows users to explore cryptocurrency markets, view detailed co
 
 ## 📱 Screenshots
 
-### Market
-
-![Market Screen](marketpage.jpeg)
-
-### Market Statistics
-
-![Market Statistics](martstatistics.jpeg)
-
-### Watchlist
-
-![Watchlist](watchlist.jpeg)
-
-### Coin Details
-
-![Coin Details](coindetails.jpeg)
-
-
+<p align="center">
+  <img src="martketpage.jpeg" width="22%" />
+  <img src="martstatistics.jpeg" width="22%" />
+  <img src="watchlist.jpeg" width="22%" />
+  <img src="coindetails.jpeg" width="22%" />
+</p>
 ---
 
 ## ✨ Features
