@@ -5,34 +5,24 @@ class MarketHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Crypto Research',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
-                ),
-              ),
-              SizedBox(height: 4),
-              Text(
-                'Track. Explore. Analyze.',
-                style: TextStyle(fontSize: 13, color: Colors.white60),
-              ),
-            ],
+        Text(
+          'Crypto Research',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.w700,
+            color: Colors.white,
           ),
         ),
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.notifications_none_rounded,
-            color: Colors.white,
+        SizedBox(height: 5),
+        Text(
+          'Track. Explore. Analyze.',
+          style: TextStyle(
+            fontSize: 13,
+            color: Colors.white60,
+            fontWeight: FontWeight.w400,
           ),
         ),
       ],

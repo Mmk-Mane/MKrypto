@@ -96,4 +96,26 @@ class CoinProvider extends ChangeNotifier {
   bool isWatchlisted(String coinId) {
     return watchlistIds.contains(coinId);
   }
+
+  List<CoinModel> get topGainers {
+    final result = [...coins];
+
+    result.sort(
+      (a, b) =>
+          b.priceChangePercentage24h.compareTo(a.priceChangePercentage24h),
+    );
+
+    return result.take(10).toList();
+  }
+
+  List<CoinModel> get topLosers {
+    final result = [...coins];
+
+    result.sort(
+      (a, b) =>
+          a.priceChangePercentage24h.compareTo(b.priceChangePercentage24h),
+    );
+
+    return result.take(10).toList();
+  }
 }

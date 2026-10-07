@@ -1,10 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:mkrypto/providers/coin_provider.dart';
+import 'package:mkrypto/views/details/coin_details_screen.dart';
 import 'package:mkrypto/widgets/coin_list_tile.dart';
 import 'package:provider/provider.dart';
 
-class WatchlistScreen extends StatelessWidget {
+class WatchlistScreen extends StatefulWidget {
   const WatchlistScreen({super.key});
+
+  @override
+  State<WatchlistScreen> createState() => _WatchlistScreenState();
+}
+
+class _WatchlistScreenState extends State<WatchlistScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final provider = context.read<CoinProvider>();
+
+      if (provider.coins.isEmpty) {
+        provider.fetchCoins();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,31 +49,81 @@ class WatchlistScreen extends StatelessWidget {
                   .toList();
 
           if (watchlistedCoins.isEmpty) {
-            return const Center(
+            return Center(
               child: Padding(
-                padding: EdgeInsets.all(32),
+                padding: const EdgeInsets.symmetric(horizontal: 32),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
-                      Icons.star_border_rounded,
-                      color: Colors.white38,
-                      size: 56,
-                    ),
-                    SizedBox(height: 16),
-                    Text(
-                      'Your watchlist is empty',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
+                    Container(
+                      width: 88,
+                      height: 88,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF5B4BFF).withValues(alpha: 0.12),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.star_rounded,
+                        color: Color(0xFF8B7CFF),
+                        size: 42,
                       ),
                     ),
-                    SizedBox(height: 8),
-                    Text(
-                      'Tap the star on a coin to add it to your watchlist.',
+
+                    const SizedBox(height: 22),
+
+                    const Text(
+                      'Your watchlist is empty',
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white54, fontSize: 13),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 19,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+
+                    const SizedBox(height: 8),
+
+                    const Text(
+                      'Save your favorite coins here to quickly track their price and market performance.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white54,
+                        fontSize: 13,
+                        height: 1.5,
+                      ),
+                    ),
+
+                    const SizedBox(height: 22),
+
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 14,
+                        vertical: 9,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF111C2B),
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: const Color(0xFF29384D)),
+                      ),
+                      child: const Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.star_border_rounded,
+                            color: Color(0xFFFFC83D),
+                            size: 17,
+                          ),
+                          SizedBox(width: 7),
+                          Text(
+                            'Tap the star to save a coin',
+                            style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -74,6 +143,14 @@ class WatchlistScreen extends StatelessWidget {
                 isWatchlisted: true,
                 onWatchlistTap: () {
                   provider.toggleWatchlist(coin.id);
+                },
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => CoinDetailsScreen(coinId: coin.id),
+                    ),
+                  );
                 },
               );
             },

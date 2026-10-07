@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mkrypto/providers/coin_details_provider.dart';
 import 'package:mkrypto/providers/coin_provider.dart';
+import 'package:mkrypto/providers/market_stats_provider.dart';
 import 'package:mkrypto/views/home/home_screen.dart';
-import 'package:mkrypto/views/market/market_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -15,10 +16,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => CoinProvider())],
+      providers: [
+        ChangeNotifierProvider(create: (_) => CoinProvider()),
+        ChangeNotifierProvider(create: (_) => MarketStatsProvider()),
+        ChangeNotifierProvider(create: (_) => CoinDetailsProvider()),
+      ],
 
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'MMK MKrypto App',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         ),

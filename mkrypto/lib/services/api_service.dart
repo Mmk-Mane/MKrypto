@@ -21,8 +21,14 @@ class ApiService {
     return response.data;
   }
 
-  Future<Map<String, dynamic>> getCoinChart(String coinId) async {
-    final response = await _dio.get('/coins/$coinId/chart');
+  Future<Map<String, dynamic>> getCoinChart(
+    String coinId, {
+    int days = 7,
+  }) async {
+    final response = await _dio.get(
+      '/coins/$coinId/chart',
+      queryParameters: {'days': days},
+    );
 
     return response.data;
   }
