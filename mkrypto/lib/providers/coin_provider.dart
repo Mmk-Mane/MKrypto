@@ -98,7 +98,8 @@ class CoinProvider extends ChangeNotifier {
   }
 
   List<CoinModel> get topGainers {
-    final result = [...coins];
+    final result =
+        coins.where((coin) => coin.priceChangePercentage24h > 0).toList();
 
     result.sort(
       (a, b) =>
@@ -109,7 +110,8 @@ class CoinProvider extends ChangeNotifier {
   }
 
   List<CoinModel> get topLosers {
-    final result = [...coins];
+    final result =
+        coins.where((coin) => coin.priceChangePercentage24h < 0).toList();
 
     result.sort(
       (a, b) =>
