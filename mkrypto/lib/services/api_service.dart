@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 class ApiService {
   final Dio _dio = Dio(
     BaseOptions(
-      baseUrl: 'http://localhost:3000/api',
+      baseUrl: 'https://mkrypto-backend.onrender.com/api',
       connectTimeout: const Duration(seconds: 10),
       receiveTimeout: const Duration(seconds: 10),
     ),
