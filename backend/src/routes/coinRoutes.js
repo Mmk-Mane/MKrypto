@@ -23,12 +23,13 @@ router.get("/", async (req, res) => {
 
 router.get("/:id/chart", async (req, res) => {
   try {
-    const chart = await getCoinChart(req.params.id);
+    const days = Number(req.query.days) || 7;
+
+    const chart = await getCoinChart(req.params.id, days);
 
     res.json(chart);
   } catch (error) {
     console.error("Coin Chart API Error:", error.message);
-
     res.status(500).json({
       message: "Failed to fetch coin chart data",
     });

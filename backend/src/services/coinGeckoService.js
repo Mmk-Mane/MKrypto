@@ -37,13 +37,14 @@ const getCoinDetails = async (coinId) => {
   return response.data;
 };
 
-const getCoinChart = async (coinId) => {
+const getCoinChart = async (coinId, days = 7) => {
   const response = await coinGeckoApi.get(
     `/coins/${coinId}/market_chart`,
     {
       params: {
         vs_currency: "usd",
-        days: 7,
+        days: days,
+        interval: "hourly",
       },
     }
   );
